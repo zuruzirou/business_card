@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BISINESS_CARD_6</title>
+    <title>BISINESS_CARD_7</title>
 
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
@@ -18,7 +18,7 @@
         <a-entity camera></a-entity>
         <a-assets>
             <!-- GIF画像をアセットとして読み込む -->
-            <video id="ar-video" autoplay loop="true" muted="true" src="meisi.mp4"></video>
+            <video id="ar-video" autoplay loop="false" muted="true" src="meisi.mp4"></video>
         </a-assets>
         <!-- Markerを表示した際の処理を以下に記述する -->
         <!-- ARマーカーのファイル名をここで指定する -->
@@ -34,8 +34,8 @@
              -->
             <a-video 
                 src="#ar-video" 
-                width="2.0" 
-                height="2.0" 
+                width="1.0" 
+                height="1.0" 
                 position="0 0 0" 
                 rotation="270 0 0" 
                 play="true">
