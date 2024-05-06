@@ -8,6 +8,8 @@
     <title>BISINESS_CARD</title>
     
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
 </head>
 
@@ -28,7 +30,7 @@
             </a-image>
              -->
             <a-entity
-            src="img/meisi.gif"
+            material="shader:gif;src:url(img/meisi.gif);"
             position="0 0 0.3"
             rotation="-90 0 0"
             scale="1.5 1.5 1"
