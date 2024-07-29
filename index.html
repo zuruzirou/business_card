@@ -1,13 +1,54 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>QR Code Scanner with A-Frame</title>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BISINESS_CARD_7</title>
+
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-qrcode-scanner-component/dist/aframe-qrcode-scanner-component.min.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <a-entity qrcode-scanner></a-entity>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+    <script src="https://unpkg.com/aframe-gif-shader/dist/aframe-gif-shader.min.js"></script>
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+    <a-scene embedded arjs="debugUIEnabled:false;">
+        <a-entity camera></a-entity>
+        <a-assets>
+            <!-- GIF画像をアセットとして読み込む -->
+            <video id="ar-video" autoplay loop="false" muted="true" src="meisi.mp4"></video>
+        </a-assets>
+        <!-- Markerを表示した際の処理を以下に記述する -->
+        <!-- ARマーカーのファイル名をここで指定する -->
+        <a-marker type="pattern" url="img/pattern-QR_740511.patt">
+
+            <!-- 表示したい画像を src= ～ で指定する -->
+            <!-- 画像の大きさは width と height で設定可能 -->
+            <!-- 画像を表示させる位置は position で設定可能 -->
+            <!-- 画像を水平に表示させる場合は下記の rotation でOK -->
+            <!--
+            <a-image width="2" height="4" position="0.2 0.2 0" rotation="-90 0 0" src="img/icon.png">
+            </a-image>
+             -->
+            <a-video 
+                src="#ar-video" 
+                width="3.0" 
+                height="3.0" 
+                position="0 0 0" 
+                rotation="270 0 0" 
+                play="true">
+            </a-video>
+
+        </a-marker>
     </a-scene>
-  </body>
+    <script>
+      window.addEventListener('click', function () {
+      var v = document.querySelector('#ar-video');
+      v.play();
+      });
+    </script>
+</body>
+
 </html>
