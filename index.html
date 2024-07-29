@@ -1,55 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VR Business Card</title>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
-</head>
-<body>
-    <a-scene background="color: #FAFAFA" webxr="requiredFeatures: hit-test,local-floor;">
-        <a-assets>
-            <video id="vr-video" src="meisi.mp4" preload="auto"></video>
-        </a-assets>
-
-        <a-entity id="rig" movement-controls position="0 1.6 0">
-            <a-entity camera look-controls></a-entity>
-            <a-entity cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
-            <a-entity laser-controls="hand: right"></a-entity>
-        </a-entity>
-
-        <a-entity
-            position="0 1.5 -3"
-            rotation="0 0 0"
-            scale="1 1 1"
-            geometry="primitive: plane; width: 3; height: 3;"
-            material="shader: flat; side: double;"
-            video-plane>
-            <a-video src="#vr-video" width="3" height="3" position="0 0 0.01"></a-video>
-        </a-entity>
-
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+<html>
+  <head>
+    <title>QR Code Scanner with A-Frame</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-qrcode-scanner-component/dist/aframe-qrcode-scanner-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity qrcode-scanner></a-entity>
     </a-scene>
-
-    <script>
-        AFRAME.registerComponent('video-plane', {
-            init: function () {
-                this.el.addEventListener('click', function () {
-                    var videoEl = document.querySelector('#vr-video');
-                    if (videoEl.paused) {
-                        videoEl.play();
-                    } else {
-                        videoEl.pause();
-                    }
-                });
-            }
-        });
-
-        document.querySelector('a-scene').addEventListener('enter-vr', function () {
-            var videoEl = document.querySelector('#vr-video');
-            videoEl.play();
-        });
-    </script>
-</body>
+  </body>
 </html>
