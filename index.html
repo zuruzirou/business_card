@@ -1,45 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BISINESS_CARD_7</title>
-
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-gif-shader/dist/aframe-gif-shader.min.js"></script>
+    <title>VR Business Card</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
 </head>
-
-<body style="margin : 0px; overflow: hidden;">
-    <a-scene>
+<body>
+    <a-scene background="color: #FAFAFA" webxr="requiredFeatures: hit-test,local-floor;">
         <a-assets>
-            <video id="vr-video" autoplay loop="false" muted="true" src="meisi.mp4"></video>
+            <video id="vr-video" src="meisi.mp4" preload="auto"></video>
         </a-assets>
-        
-        <!-- VRシーン内にカメラを設置 -->
-        <a-entity camera position="0 1.6 0"></a-entity>
-        
-        <!-- VR空間にビデオを表示 -->
-        <a-video 
-            src="#vr-video" 
-            width="4.0" 
-            height="2.25" 
-            position="0 1.6 -4" 
-            rotation="0 0 0" 
-            play="true">
-        </a-video>
-        
-        <!-- 簡単な環境を追加（必要に応じて削除や変更可能） -->
-        <a-sky color="#ECECEC"></a-sky>
-        <a-plane color="#7BC8A4" rotation="-90 0 0" width="10" height="10"></a-plane>
+
+        <a-entity id="rig" movement-controls position="0 1.6 0">
+            <a-entity camera look-controls></a-entity>
+            <a-entity cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
+            <a-entity laser-controls="hand: right"></a-entity>
+        </a-entity>
+
+        <a-entity
+            position="0 1.5 -3"
+            rotation="0 0 0"
+            scale="1 1 1"
+            geometry="primitive: plane; width: 3; height: 3;"
+            material="shader: flat; side: double;"
+            video-plane>
+            <a-video src="#vr-video" width="3" height="3" position="0 0 0.01"></a-video>
+        </a-entity>
+
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
     </a-scene>
+
     <script>
-        window.addEventListener('click', function () {
-            var v = document.querySelector('#vr-video');
-            v.play();
+        AFRAME.registerComponent('video-plane', {
+            init: function () {
+                this.el.addEventListener('click', function () {
+                    var videoEl = document.querySelector('#vr-video');
+                    if (videoEl.paused) {
+                        videoEl.play();
+                    } else {
+                        videoEl.pause();
+                    }
+                });
+            }
+        });
+
+        document.querySelector('a-scene').addEventListener('enter-vr', function () {
+            var videoEl = document.querySelector('#vr-video');
+            videoEl.play();
         });
     </script>
 </body>
-
 </html>
