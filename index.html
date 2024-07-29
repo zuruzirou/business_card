@@ -8,46 +8,37 @@
     <title>BISINESS_CARD_7</title>
 
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
     <script src="https://unpkg.com/aframe-gif-shader/dist/aframe-gif-shader.min.js"></script>
 </head>
 
 <body style="margin : 0px; overflow: hidden;">
-    <a-scene embedded arjs="sourceType: webcam-front; debugUIEnabled:false;">
-        <a-entity camera></a-entity>
+    <a-scene>
         <a-assets>
-            <!-- GIF画像をアセットとして読み込む -->
-            <video id="ar-video" autoplay loop="false" muted="true" src="meisi.mp4"></video>
+            <video id="vr-video" autoplay loop="false" muted="true" src="meisi.mp4"></video>
         </a-assets>
-        <!-- Markerを表示した際の処理を以下に記述する -->
-        <!-- ARマーカーのファイル名をここで指定する -->
-        <a-marker type="pattern" url="img/pattern-QR_740511.patt">
-
-            <!-- 表示したい画像を src= ～ で指定する -->
-            <!-- 画像の大きさは width と height で設定可能 -->
-            <!-- 画像を表示させる位置は position で設定可能 -->
-            <!-- 画像を水平に表示させる場合は下記の rotation でOK -->
-            <!--
-            <a-image width="2" height="4" position="0.2 0.2 0" rotation="-90 0 0" src="img/icon.png">
-            </a-image>
-             -->
-            <a-video 
-                src="#ar-video" 
-                width="3.0" 
-                height="3.0" 
-                position="0 0 0" 
-                rotation="270 0 0" 
-                play="true">
-            </a-video>
-
-        </a-marker>
+        
+        <!-- VRシーン内にカメラを設置 -->
+        <a-entity camera position="0 1.6 0"></a-entity>
+        
+        <!-- VR空間にビデオを表示 -->
+        <a-video 
+            src="#vr-video" 
+            width="4.0" 
+            height="2.25" 
+            position="0 1.6 -4" 
+            rotation="0 0 0" 
+            play="true">
+        </a-video>
+        
+        <!-- 簡単な環境を追加（必要に応じて削除や変更可能） -->
+        <a-sky color="#ECECEC"></a-sky>
+        <a-plane color="#7BC8A4" rotation="-90 0 0" width="10" height="10"></a-plane>
     </a-scene>
     <script>
-      window.addEventListener('click', function () {
-      var v = document.querySelector('#ar-video');
-      v.play();
-      });
+        window.addEventListener('click', function () {
+            var v = document.querySelector('#vr-video');
+            v.play();
+        });
     </script>
 </body>
 
